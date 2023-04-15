@@ -1,0 +1,12 @@
+.main-container {
+  background-color: #ffe300;
+}
+
+.body-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
