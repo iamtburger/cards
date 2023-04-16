@@ -4,6 +4,8 @@ export const createCardsModalLabels = {
   header: 'Create your pack of learning cards',
   topic: 'Gimme a topic!',
   beNice: 'Be nice! If you want to break the app, you probably will be able.',
+  generatePack: 'Generate Pack',
+  generatePackIsLoading: "...so, how's your day?",
 };
 
 export const cardDifficultyLabels = {

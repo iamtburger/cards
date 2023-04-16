@@ -4,14 +4,9 @@ import { Card, CardBody, CardHeader, Heading, Text } from '@chakra-ui/react';
 interface LearningCardProps {
   question: string;
   answer: string;
-  flippable?: boolean;
 }
 
-const LearningCard = ({
-  question,
-  answer,
-  flippable = false,
-}: LearningCardProps) => {
+const LearningCard = ({ question, answer }: LearningCardProps) => {
   const [showAnswer, setShowAnswer] = useState(false);
 
   return showAnswer ? (
@@ -24,7 +19,7 @@ const LearningCard = ({
     <CardSide
       title="Question"
       text={question}
-      flipCard={() => flippable && setShowAnswer(true)}
+      flipCard={() => setShowAnswer(true)}
     />
   );
 };
@@ -41,6 +36,7 @@ const CardSide = ({
   return (
     <Card
       size="lg"
+      backgroundColor="gray.100"
       variant="elevated"
       align="center"
       w={[250, 400, 600, 900]}

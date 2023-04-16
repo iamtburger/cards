@@ -13,3 +13,10 @@ export interface Card {
 }
 
 export type Cards = Card[];
+
+export interface ChatGPTRequestBody {
+  model: string;
+  prompt: string;
+  temperature: number;
+  max_tokens: number;
+}

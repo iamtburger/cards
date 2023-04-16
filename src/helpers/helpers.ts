@@ -1,5 +1,9 @@
 import { CardComplexity, CardDifficulty } from '../data/enums';
-import { OpenAiCompletionResponse } from '../data/types';
+import {
+  Cards,
+  ChatGPTRequestBody,
+  OpenAiCompletionResponse,
+} from '../data/types';
 
 const MODEL = 'text-davinci-003';
 const TEMPERATURE = 0;
@@ -11,13 +15,6 @@ const difficultyPromptText = {
   [CardDifficulty.MEDIUM]: 'medium',
   [CardDifficulty.HARD]: 'hard',
 };
-
-interface ChatGPTRequestBody {
-  model: string;
-  prompt: string;
-  temperature: number;
-  max_tokens: number;
-}
 
 export const generatePromptMessage = (
   topic: string,
@@ -46,13 +43,37 @@ export const generateRequestBody = (
   };
 };
 
-export const parseCards = (response: OpenAiCompletionResponse) => {
+const QUESTION_REGEX = new RegExp(/\[Question([0-9]*)\]/);
+const ANSWER_REGEX = new RegExp(/\[Answer([0-9]*)\]/);
+
+export const parseCards = (response: OpenAiCompletionResponse): Cards => {
   const responseArray =
     response.data.choices[0].text
       ?.split('\n\n')
       .filter((item) => item !== '') || [];
-  return responseArray.map((item) => ({
-    question: item.split('\n')[0],
-    answer: item.split('\n')[1],
-  }));
+  return responseArray.map((item) => {
+    const question = item.split('\n')[0];
+    const answer = item.split('\n')[1];
+
+    if (!QUESTION_REGEX.test(question) || !ANSWER_REGEX.test(answer)) {
+      throw new Error('Wrong response format');
+    }
+
+    const cleanedQuestion = question.replace(QUESTION_REGEX, '');
+    const cleanedAnswer = answer.replace(ANSWER_REGEX, '');
+
+    return {
+      question: cleanedQuestion,
+      answer: cleanedAnswer,
+    };
+  });
+};
+
+export const isResponseInValidFormat = (
+  parsedCards: Cards,
+  definedLength: number
+) => {
+  if (parsedCards.length < definedLength) {
+    throw Error('Wrong response format');
+  }
 };
