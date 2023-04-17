@@ -5,8 +5,8 @@ import {
   OpenAiCompletionResponse,
 } from '../data/types';
 
-const MODEL = 'text-davinci-003';
-const TEMPERATURE = 0;
+export const MODEL = 'text-davinci-003';
+export const TEMPERATURE = 0;
 const PROMPT_CONGIG_TEXT =
   'The questions should start with [Question#] and the answers should start with [Answer#] where the # character is the number of the question and answer. A card consists one question and one answer, please separate each card content.';
 
@@ -25,23 +25,27 @@ export const generatePromptMessage = (
 	answer format. The questions should be ${difficultyPromptText[difficulty]} difficulty. ${PROMPT_CONGIG_TEXT}`;
 };
 
-export const generateRequestBody = (
-  length: string,
-  promptMessage: string
-): ChatGPTRequestBody => {
-  const lengthOptions: { [key: string]: number } = {
-    [CardComplexity.LOW]: 1000,
-    [CardComplexity.MEDIUM]: 2000,
-    [CardComplexity.HIGH]: 3000,
+export const configRequestBodyGenerator =
+  (model: string, temperature: number) =>
+  (length: string, promptMessage: string): ChatGPTRequestBody => {
+    const lengthOptions: { [key: string]: number } = {
+      [CardComplexity.LOW]: 1000,
+      [CardComplexity.MEDIUM]: 2000,
+      [CardComplexity.HIGH]: 3000,
+    };
+
+    return {
+      model: model,
+      prompt: promptMessage,
+      temperature: temperature,
+      max_tokens: lengthOptions[length],
+    };
   };
 
-  return {
-    model: MODEL,
-    prompt: promptMessage,
-    temperature: TEMPERATURE,
-    max_tokens: lengthOptions[length],
-  };
-};
+export const generateRequestBody = configRequestBodyGenerator(
+  MODEL,
+  TEMPERATURE
+);
 
 const QUESTION_REGEX = new RegExp(/\[Question([0-9]*)\]/);
 const ANSWER_REGEX = new RegExp(/\[Answer([0-9]*)\]/);

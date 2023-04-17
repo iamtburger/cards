@@ -52,6 +52,7 @@ const InputModal = ({ isOpen, onClose, setCards }: InputModalProps) => {
   const onGenerateCardsClick = useCallback(async () => {
     try {
       setIsLoading(true);
+      setCards([]);
       const openAiResponse = await generateCards(
         complexity,
         generatePromptMessage(topic, numberOfCards, difficulty)
