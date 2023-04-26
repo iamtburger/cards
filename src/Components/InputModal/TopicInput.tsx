@@ -16,6 +16,7 @@ const TopicInput = ({
       type="text"
       value={topic}
       onChange={(e) => setTopic(e.currentTarget.value)}
+      placeholder="A very interesting topic"
     />
     <FormHelperText>{createCardsModalLabels.beNice}</FormHelperText>
   </Box>

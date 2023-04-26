@@ -10,6 +10,14 @@
         "prettier"
     ],
     "overrides": [
+        {
+            "files": [
+                "**/*.test.tsx"
+            ],
+            "rules": {
+                "react/react-in-jsx-scope": "off"
+            }
+        }
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -21,5 +29,11 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "react/react-in-jsx-scope": [
+            "error",
+            {
+                "ignoreTestFiles": true
+            }
+        ]
     }
 }

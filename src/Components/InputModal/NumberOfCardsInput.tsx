@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, FormLabel, Select } from '@chakra-ui/react';
+
 import { CardNumber } from '../../data/enums';
 import { numberOfCardsLabels } from '../../data/labels';
 

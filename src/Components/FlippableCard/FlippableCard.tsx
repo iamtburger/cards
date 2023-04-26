@@ -1,37 +1,31 @@
 import React, { useState } from 'react';
 import { Card, CardBody, CardHeader, Heading, Text } from '@chakra-ui/react';
 
-interface LearningCardProps {
+interface FlippableCardProps {
   question: string;
   answer: string;
 }
 
-const LearningCard = ({ question, answer }: LearningCardProps) => {
+const FlippableCard = ({ question, answer }: FlippableCardProps) => {
   const [showAnswer, setShowAnswer] = useState(false);
 
+  const flipCard = () => setShowAnswer((prevState) => !prevState);
+
   return showAnswer ? (
-    <CardSide
-      title={question}
-      text={answer}
-      flipCard={() => setShowAnswer(false)}
-    />
+    <CardSide title={question} text={answer} onClick={flipCard} />
   ) : (
-    <CardSide
-      title="Question"
-      text={question}
-      flipCard={() => setShowAnswer(true)}
-    />
+    <CardSide title="Question" text={question} onClick={flipCard} />
   );
 };
 
 const CardSide = ({
   title,
   text,
-  flipCard,
+  onClick,
 }: {
   title: string;
   text: string;
-  flipCard: () => void;
+  onClick: () => void;
 }) => {
   return (
     <Card
@@ -43,7 +37,7 @@ const CardSide = ({
       m={3}
       minH={350}
       maxH={'60vh'}
-      onClick={flipCard}
+      onClick={onClick}
     >
       <CardHeader>
         <Heading size="md">{title}</Heading>
@@ -55,4 +49,4 @@ const CardSide = ({
   );
 };
 
-export default LearningCard;
+export default FlippableCard;
