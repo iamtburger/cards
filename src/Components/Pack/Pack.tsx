@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import InputModal from '../InputModal/InputModal';
-import LearningCard from '../LearningCard/LearningCard';
-import IntroCard from '../IntroCard/IntroCard';
+import InputModal from '../InputModal';
+import LearningCard from '../FlippableCard';
+import IntroCard from '../IntroCard/';
 import { Cards } from '../../data/types';
 
 import '../../App.css';

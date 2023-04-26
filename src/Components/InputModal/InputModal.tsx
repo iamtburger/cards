@@ -17,9 +17,9 @@ import ComplexityInput from './ComplexityInput';
 import DifficultyInput from './DifficultyInput';
 import { createCardsModalLabels } from '../../data/labels';
 import { CardComplexity, CardDifficulty, CardNumber } from '../../data/enums';
-import { Cards, OpenAiCompletionResponse } from '../../data/types';
-import { generatePromptMessage, parseCards } from '../../helpers/helpers';
-import { generateCards } from '../../requests/requests';
+import { Cards } from '../../data/types';
+import { generatePromptMessage, parseCards } from '../../helpers';
+import { generateCards } from '../../requests';
 
 const InputOverlay = () => (
   <ModalOverlay
@@ -57,9 +57,7 @@ const InputModal = ({ isOpen, onClose, setCards }: InputModalProps) => {
         complexity,
         generatePromptMessage(topic, numberOfCards, difficulty)
       );
-      const parsedCards = parseCards(
-        openAiResponse as OpenAiCompletionResponse
-      );
+      const parsedCards = parseCards(openAiResponse);
       setCards(parsedCards);
       setIsLoading(false);
       resetInputs();

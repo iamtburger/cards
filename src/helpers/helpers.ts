@@ -1,9 +1,5 @@
 import { CardComplexity, CardDifficulty } from '../data/enums';
-import {
-  Cards,
-  ChatGPTRequestBody,
-  OpenAiCompletionResponse,
-} from '../data/types';
+import { Cards, ChatGPTRequestBody } from '../data/types';
 
 export const MODEL = 'text-davinci-003';
 export const TEMPERATURE = 0;
@@ -50,7 +46,7 @@ export const generateRequestBody = configRequestBodyGenerator(
 const QUESTION_REGEX = new RegExp(/\[Question([0-9]*)\]/);
 const ANSWER_REGEX = new RegExp(/\[Answer([0-9]*)\]/);
 
-export const parseCards = (response: OpenAiCompletionResponse): Cards => {
+export const parseCards = (response): Cards => {
   const responseArray =
     response.data.choices[0].text
       ?.split('\n\n')

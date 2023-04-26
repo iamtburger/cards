@@ -1,7 +1,7 @@
 import openai from '../../openAi';
 import { CardComplexity } from '../data/enums';
 import { ChatGPTRequestBody } from '../data/types';
-import { generateRequestBody } from '../helpers/helpers';
+import { generateRequestBody } from '../helpers';
 
 export const createCompletion = (requestBody: ChatGPTRequestBody) =>
   openai.createCompletion(requestBody);
