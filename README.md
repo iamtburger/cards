@@ -22,6 +22,4 @@ The project uses Chakra UI as I was also curious about it, but I might have gone
 
 ## There's still a lot to do
 
-- Adding unit tests
-- Upgrade the language model from `text-davinci-003` to `gpt-3.5-turbo`
-- Refine parsing logic for new model
+- Add more unit tests

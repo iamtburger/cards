@@ -1,3 +1,5 @@
+import { CardComplexity, CardDifficulty, CardNumber } from "./enums";
+
 export interface Card {
   question: string;
   answer: string;
@@ -6,8 +8,8 @@ export interface Card {
 export type Cards = Card[];
 
 export interface ChatGPTRequestBody {
-  model: string;
-  prompt: string;
-  temperature: number;
-  max_tokens: number;
+  complexity: CardComplexity;
+  topic: string;
+  numberOfCards: CardNumber;
+  difficulty: CardDifficulty;
 }

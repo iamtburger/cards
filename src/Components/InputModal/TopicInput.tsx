@@ -1,7 +1,7 @@
-import React from 'react';
-import { Box, FormLabel, Input, FormHelperText } from '@chakra-ui/react';
+import React from "react";
+import { Box, FormLabel, Input, FormHelperText } from "@chakra-ui/react";
 
-import { createCardsModalLabels } from '../../data/labels';
+import { createCardsModalLabels } from "../../data/labels";
 
 const TopicInput = ({
   setTopic,
