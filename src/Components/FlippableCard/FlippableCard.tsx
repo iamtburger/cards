@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Card, CardBody, CardHeader, Heading, Text } from '@chakra-ui/react';
+import React, { useState } from "react";
+import { Card, CardBody, CardHeader, Heading, Text } from "@chakra-ui/react";
 
 interface FlippableCardProps {
   question: string;
@@ -33,10 +33,10 @@ const CardSide = ({
       backgroundColor="gray.100"
       variant="elevated"
       align="center"
-      w={[250, 400, 600, 900]}
+      w={[450, 450, 330, 330]}
       m={3}
       minH={350}
-      maxH={'60vh'}
+      maxH={"60vh"}
       onClick={onClick}
     >
       <CardHeader>

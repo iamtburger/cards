@@ -1,12 +1,11 @@
-import openai from '../../openAi';
-import { CardComplexity } from '../data/enums';
-import { ChatGPTRequestBody } from '../data/types';
-import { generateRequestBody } from '../helpers';
+import { ChatGPTRequestBody } from "../data/types";
 
-export const createCompletion = (requestBody: ChatGPTRequestBody) =>
-  openai.createCompletion(requestBody);
-
-export const generateCards = (
-  complexity: CardComplexity,
-  promptMessage: string
-) => createCompletion(generateRequestBody(complexity, promptMessage));
+export const generateCards = async (reqBody: ChatGPTRequestBody) => {
+  const response = await fetch(`${import.meta.env.BACKEND}/api/create`, {
+    method: "POST",
+    body: JSON.stringify(reqBody),
+    headers: { "Content-Type": "application/json" },
+    mode: "cors",
+  });
+  return response.json();
+};

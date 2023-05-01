@@ -1,8 +1,8 @@
-import React from 'react';
-import { Box, FormLabel, Select } from '@chakra-ui/react';
+import React from "react";
+import { Box, FormLabel, Select } from "@chakra-ui/react";
 
-import { CardNumber } from '../../data/enums';
-import { numberOfCardsLabels } from '../../data/labels';
+import { CardNumber } from "../../data/enums";
+import { numberOfCardsLabels } from "../../data/labels";
 
 const NumberOfCardsInput = ({
   setNumberOfCards,
@@ -17,9 +17,11 @@ const NumberOfCardsInput = ({
       value={numberOfCards}
       onChange={(e) => setNumberOfCards(e.currentTarget.value)}
     >
-      <option value={CardNumber.FIVE}>{numberOfCardsLabels.options[5]}</option>
-      <option value={CardNumber.EIGHT}>{numberOfCardsLabels.options[8]}</option>
-      <option value={CardNumber.TEN}>{numberOfCardsLabels.options[10]}</option>
+      <option value={CardNumber.SIX}>{numberOfCardsLabels.options[6]}</option>
+      <option value={CardNumber.NINE}>{numberOfCardsLabels.options[9]}</option>
+      <option value={CardNumber.TWELVE}>
+        {numberOfCardsLabels.options[12]}
+      </option>
     </Select>
   </Box>
 );

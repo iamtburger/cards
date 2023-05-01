@@ -1,1 +1,3 @@
-export * from './requests';
+import { generateCards } from "./requests";
+
+export { generateCards };

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState } from "react";
 import {
   Button,
   FormControl,
@@ -9,17 +9,16 @@ import {
   ModalHeader,
   ModalOverlay,
   useToast,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import TopicInput from './TopicInput';
-import NumberOfCardsInput from './NumberOfCardsInput';
-import ComplexityInput from './ComplexityInput';
-import DifficultyInput from './DifficultyInput';
-import { createCardsModalLabels } from '../../data/labels';
-import { CardComplexity, CardDifficulty, CardNumber } from '../../data/enums';
-import { Cards } from '../../data/types';
-import { generatePromptMessage, parseCards } from '../../helpers';
-import { generateCards } from '../../requests';
+import TopicInput from "./TopicInput";
+import NumberOfCardsInput from "./NumberOfCardsInput";
+import ComplexityInput from "./ComplexityInput";
+import DifficultyInput from "./DifficultyInput";
+import { createCardsModalLabels } from "../../data/labels";
+import { Cards } from "../../data/types";
+import { CardComplexity, CardDifficulty, CardNumber } from "../../data/enums";
+import { generateCards } from "../../requests";
 
 const InputOverlay = () => (
   <ModalOverlay
@@ -35,16 +34,16 @@ interface InputModalProps {
 }
 
 const InputModal = ({ isOpen, onClose, setCards }: InputModalProps) => {
-  const [topic, setTopic] = useState('');
-  const [numberOfCards, setNumberOfCards] = useState('5');
+  const [topic, setTopic] = useState("");
+  const [numberOfCards, setNumberOfCards] = useState(CardNumber.SIX);
   const [complexity, setComplexity] = useState(CardComplexity.LOW);
   const [difficulty, setDifficulty] = useState(CardDifficulty.EASY);
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
   const resetInputs = useCallback(() => {
-    setTopic('');
-    setNumberOfCards(CardNumber.FIVE);
+    setTopic("");
+    setNumberOfCards(CardNumber.SIX);
     setComplexity(CardComplexity.LOW);
     setDifficulty(CardDifficulty.EASY);
   }, []);
@@ -53,21 +52,23 @@ const InputModal = ({ isOpen, onClose, setCards }: InputModalProps) => {
     try {
       setIsLoading(true);
       setCards([]);
-      const openAiResponse = await generateCards(
+      const result = await generateCards({
         complexity,
-        generatePromptMessage(topic, numberOfCards, difficulty)
-      );
-      const parsedCards = parseCards(openAiResponse);
-      setCards(parsedCards);
+        topic,
+        numberOfCards,
+        difficulty,
+      });
+      setCards(JSON.parse(result.content).questions);
       setIsLoading(false);
       resetInputs();
       onClose();
     } catch (e) {
-      console.error('Something went wrong while generating the cards', e);
+      console.error("Something went wrong while generating the cards", e);
+      setIsLoading(false);
       toast({
-        title: 'Something went wrong!',
+        title: "Something went wrong!",
         description: "Try again later! Or not. It's up to you.",
-        status: 'error',
+        status: "error",
         duration: 5000,
         isClosable: true,
       });
@@ -118,6 +119,6 @@ const InputModal = ({ isOpen, onClose, setCards }: InputModalProps) => {
   );
 };
 
-const MODAL_SIZE = 'xl';
+const MODAL_SIZE = "xl";
 
 export default InputModal;
