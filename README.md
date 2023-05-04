@@ -9,16 +9,12 @@ The project uses Chakra UI as I was also curious about it, but I might have gone
 
 ## How to play?
 
-1. First of all you'll need a Open AI API key to play (at least for now)
-2. Clone the project
-3. Run `npm install`
-4. Add the API key to the `openai` config
-5. Run `npm run dev`
-6. Have fun!
+I'll deploy a demo soon, but until then, if you have your own OpenAi API key you can clone this repo and the small backend service in the following repo: [OpenAi Backend](https://github.com/iamtburger/openai-be)
 
 ## Known issues
 
-- Inconsistent complexity and difficulty
+- Unfortunately there have been some issues with the complexity and difficulty of the questions and answers the model provide. I'm trying to finetune the prompt to get around this problem.
+- Also there's a speed issue with the OpenAi API. Sometimes it takes up to 20-30s to generate the questions and the answers. Be patient!
 
 ## There's still a lot to do
 

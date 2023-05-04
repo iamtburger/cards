@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import InputModal from "../InputModal";
-import LearningCard from "../FlippableCard";
+import FlippableCard from "../FlippableCard";
 import IntroCard from "../IntroCard/";
 import { Cards } from "../../data/types";
 
@@ -33,7 +33,7 @@ const Pack = ({
       >
         {cards.map(({ question, answer }, index) => (
           <Box>
-            <LearningCard
+            <FlippableCard
               question={question}
               answer={answer}
               key={`card-${index}`}
