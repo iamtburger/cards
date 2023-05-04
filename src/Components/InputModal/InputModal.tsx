@@ -9,6 +9,8 @@ import {
   ModalHeader,
   ModalOverlay,
   useToast,
+  Switch,
+  FormLabel,
 } from "@chakra-ui/react";
 
 import TopicInput from "./TopicInput";
@@ -38,6 +40,7 @@ const InputModal = ({ isOpen, onClose, setCards }: InputModalProps) => {
   const [numberOfCards, setNumberOfCards] = useState(CardNumber.SIX);
   const [complexity, setComplexity] = useState(CardComplexity.LOW);
   const [difficulty, setDifficulty] = useState(CardDifficulty.EASY);
+  const [mistery, setMistery] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
@@ -57,6 +60,7 @@ const InputModal = ({ isOpen, onClose, setCards }: InputModalProps) => {
         topic,
         numberOfCards,
         difficulty,
+        mistery,
       });
       setCards(JSON.parse(result.content).questions);
       setIsLoading(false);
@@ -89,6 +93,14 @@ const InputModal = ({ isOpen, onClose, setCards }: InputModalProps) => {
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
+            <FormLabel htmlFor="mistery-switch" mb="1">
+              I wonder what does this switch do...
+            </FormLabel>
+            <Switch
+              id="mistery-switch"
+              onChange={() => setMistery((prevState) => !prevState)}
+              isChecked={mistery}
+            />
             <TopicInput setTopic={setTopic} topic={topic} />
             <NumberOfCardsInput
               setNumberOfCards={setNumberOfCards}

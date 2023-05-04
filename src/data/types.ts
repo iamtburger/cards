@@ -12,4 +12,5 @@ export interface ChatGPTRequestBody {
   topic: string;
   numberOfCards: CardNumber;
   difficulty: CardDifficulty;
+  mistery?: boolean;
 }
