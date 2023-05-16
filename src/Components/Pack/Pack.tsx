@@ -25,19 +25,10 @@ const Pack = ({
         setCards={setCards}
       />
       {cards.length === 0 && <IntroCard />}
-      {/* <SimpleGrid columns={[1, 2, 3]} spacing={5}> */}
-      <SimpleGrid
-        columns={[1, 1, 2, 3, 3]}
-        // columns={{ base: 1, sm: 1, md: 2, lg: 3, xl: 3 }}
-        spacing={5}
-      >
+      <SimpleGrid columns={[1, 1, 2, 3, 3]} spacing={5}>
         {cards.map(({ question, answer }, index) => (
-          <Box>
-            <FlippableCard
-              question={question}
-              answer={answer}
-              key={`card-${index}`}
-            />
+          <Box key={`card-${index}`}>
+            <FlippableCard question={question} answer={answer} />
           </Box>
         ))}
       </SimpleGrid>
